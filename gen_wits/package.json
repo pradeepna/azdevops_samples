@@ -1,0 +1,16 @@
+{
+  "name": "gen_wits",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "azure-devops-node-api": "^10.1.0",
+    "dotenv": "^8.2.0"
+  }
+}
