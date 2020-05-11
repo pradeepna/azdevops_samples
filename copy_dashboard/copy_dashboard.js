@@ -26,12 +26,23 @@ const destTeam = argv.dest_team;
 const authHandler = AzDev.getPersonalAccessTokenHandler(pat);
 const connection = new AzDev.WebApi(org, authHandler);
 
+function validate(arg, message) {
+    if (!arg) {
+        console.error(message);
+        process.exit(1);
+    }
+}
+
 async function copy_dashboard(sourceProjectName, sourceTeamName, destProjectName, destTeamName, dashboardId) {
     try {
         const coreApi = await connection.getCoreApi();
         const dashboardApi = await connection.getDashboardApi();
         const sourceProject = await coreApi.getProject(sourceProjectName);
+        validate(sourceProject, `Source project '${sourceProjectName}' does not exist`);
+
         const sourceTeam = await coreApi.getTeam(sourceProject.id, sourceTeamName);
+        validate(sourceTeam, `Source team '${sourceTeamName}' does not exist`)
+
         const teamContext = { 
             project: sourceProject.name,
             projectId: sourceProject.id,
@@ -40,8 +51,14 @@ async function copy_dashboard(sourceProjectName, sourceTeamName, destProjectName
         };
 
         const dashboard = await dashboardApi.getDashboard(teamContext, dashboardId);
+        validate(dashboard, `Dashboard with id '${dashboardId}' does not exist`)
+
         const destProject = await coreApi.getProject(destProjectName);
+        validate(destProject, `Dest project '${destProjectName}' does not exist`);
+
         const destTeam = await coreApi.getTeam(destProject.name, destTeamName);
+        validate(destTeam, `Dest team '${destTeamName}' does not exist`);
+
         const destTeamContext = {
             project: destProject.name,
             projectId: destProject.id,
@@ -50,7 +67,7 @@ async function copy_dashboard(sourceProjectName, sourceTeamName, destProjectName
         }
 
         delete dashboard.id;
-        dashboard.name = "Cloned dashboard";
+        dashboard.name = `Copied ${dashboard.name}`
         const clonedDashboard = await dashboardApi.createDashboard(dashboard, destTeamContext);
         console.log(`New dashboard with id ${clonedDashboard.id} created`);
     }
