@@ -40,7 +40,6 @@ async function copy_dashboard(sourceProjectName, sourceTeamName, destProjectName
         };
 
         const dashboard = await dashboardApi.getDashboard(teamContext, dashboardId);
-
         const destProject = await coreApi.getProject(destProjectName);
         const destTeam = await coreApi.getTeam(destProject.name, destTeamName);
         const destTeamContext = {
@@ -56,7 +55,7 @@ async function copy_dashboard(sourceProjectName, sourceTeamName, destProjectName
         console.log(`New dashboard with id ${clonedDashboard.id} created`);
     }
     catch (error) {
-        console.error(JSON.stringify(error.message))
+        console.error(error.message);
     }
 }
 
