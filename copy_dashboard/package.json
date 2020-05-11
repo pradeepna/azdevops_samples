@@ -1,0 +1,17 @@
+{
+  "name": "copy_dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "azure-devops-node-api": "^10.1.1",
+    "dotenv": "^8.2.0",
+    "yargs": "^15.3.1"
+  }
+}
