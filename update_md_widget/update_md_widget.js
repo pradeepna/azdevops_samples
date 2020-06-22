@@ -65,7 +65,7 @@ async function updateMarkdownWidget(projectName, teamName, dashboardId, widgetTi
         console.log(`Filtering custom markdown widgets...`);
         const filteredWidgets = widgets.filter(w => w.typeId === "Microsoft.VisualStudioOnline.Dashboards.MarkdownWidget" &&
                                                w.settings &&
-                                               w.settings.indexOf("repositoryId") <= 0 &&
+                                               w.settings.indexOf("repositoryId") < 0 &&
                                                w.settings.split("\n")[0] &&
                                                w.settings.split("\n")[0].indexOf(widgetTitleContains) >= 0);
 
