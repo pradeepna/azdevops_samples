@@ -89,7 +89,7 @@ async function updateMarkdownWidget(projectName, teamName, dashboardId, widgetTi
         }
 
         if (filteredWidgets.length > 1) {
-            console.error(`More than one widget found where title contains '${widgetTitleContains}'. Please specify a widget name that matches a single widgets`);
+            console.error(`More than one widget found where title contains '${widgetTitleContains}'. Please specify a widget title that matches a single widget`);
             return;
         }
 
@@ -105,7 +105,7 @@ async function updateMarkdownWidget(projectName, teamName, dashboardId, widgetTi
         const widget = await dashboardApi.getWidget(teamContext, dashboardId, widgetToReplace.id);
         widget.settings = newMarkdown;
         
-        console.log(`Updating widget '${widgetTitleContains}'...`);
+        console.log(`Updating widget where title contains '${widgetTitleContains}'...`);
         await dashboardApi.updateWidget(widget, teamContext, dashboardId, widget.id);
 
         console.log(`Widget ${widgetTitleContains} replaced successfully`);
