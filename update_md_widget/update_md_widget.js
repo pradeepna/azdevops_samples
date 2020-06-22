@@ -108,7 +108,7 @@ async function updateMarkdownWidget(projectName, teamName, dashboardId, widgetTi
         console.log(`Updating widget where title contains '${widgetTitleContains}'...`);
         await dashboardApi.updateWidget(widget, teamContext, dashboardId, widget.id);
 
-        console.log(`Widget ${widgetTitleContains} replaced successfully`);
+        console.log(`Widget where title contains '${widgetTitleContains}' replaced successfully`);
     }
     catch (error) {
         console.error(error.message);
